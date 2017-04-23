@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>栈的创建</title>
+    <style>
+        #outBox{
+            width:100%;
+            height:40px;
+        }
+        #convert{
+            margin-bottom:40px;
+        }
+    </style>
+</head>
+<body>
+<p>创建一个栈</p>
+<div id="convert">
+    <input id="inBtn" type="text">
+    <p id="outBox"></p>
+    <button id="convert2">2进制转换按钮</button>
+    <button id="convert8">8进制转换按钮</button>
+    <button id="convert16">16进制转换按钮</button>
+</div>
+<script>
+    var convert2=document.getElementById("convert2");
+    var convert8=document.getElementById("convert8");
+    var convert16=document.getElementById("convert16");
+    var outBox=document.getElementById("outBox");
+      convert2.onclick=function(){
+      if(document.getElementById("inBtn").value.length>0){
+        outBox.innerHTML=baseConverter(document.getElementById("inBtn").value,2).toString();
+        outBox.style.color="#666";
+      }else{
+        outBox.innerHTML="请输入数字";
+        outBox.style.color="#f00";
+      }
+
+    }
+    convert8.onclick=function(){
+      if(document.getElementById("inBtn").value.length>0){
+        outBox.innerHTML=baseConverter(document.getElementById("inBtn").value,8).toString();
+        outBox.style.color="#666";
+      }else{
+        outBox.innerHTML="请输入数字";
+        outBox.style.color="#f00";
+      }
+
+    }
+    convert16.onclick=function(){
+      if(document.getElementById("inBtn").value.length>0){
+        outBox.innerHTML=baseConverter(document.getElementById("inBtn").value,16).toString();
+        outBox.style.color="#666";
+      }else{
+        outBox.innerHTML="请输入数字";
+        outBox.style.color="#f00";
+      }
+
+    }
+    function Stack(){
+      var items=[];
+      this.push=function(element){
+        //console.log(items);
+        items.push(element);
+       // console.log(items);
+      };
+      this.pop=function(){
+        //console.log(items);
+        return items.pop();
+       // console.log(items);
+       // console.log(items.pop());
+      }
+      this.peek=function(){
+        return items[items.length-1]
+      }
+      this.size=function(){
+        return items.length;
+      }
+      this.clear=function(){
+        items=[];
+      }
+      this.isEmpty=function(){
+        return items.length===0;
+      }
+      this.print=function(){
+        console.log(items.toString());
+      }
+    }// stack over
+    var stack=new Stack();
+   // console.log(stack.isEmpty());
+    document.write("判断栈是否为空: "+stack.isEmpty()+"<br>")
+    //往栈里面添加元素
+    stack.push(5);
+    stack.push(8);
+    stack.push(1);
+    document.write("查找栈最后添加的元素： "+stack.peek()+"<br>");
+    //再添加一个元素
+    stack.push(12);
+    document.write("栈的长度： "+stack.size()+"<br>");
+    document.write("判断栈是否为空: "+stack.isEmpty()+"<br>");
+
+    stack.print();
+
+    //移除2个元素
+    stack.pop();
+    stack.pop();
+    document.write("移除的元素： "+stack.pop()+"<br>");
+    document.write("栈的长度： "+stack.size()+"<br>");
+    stack.print();
+    function divideBy2(decNumber){
+      var remStack=new Stack(),
+          rem,
+        binaryStack=new Stack(),
+          binaryStr='';
+      while(decNumber>0){
+        rem=Math.floor(decNumber%2);
+        //console.log("rem:"+rem);
+        remStack.push(rem);
+        decNumber=Math.floor(decNumber/2);
+      }
+      //console.log(remStack);
+      //remStack.print();
+     while(!remStack.isEmpty()){
+       /* remStack.pop();
+        remStack.print();
+        binaryStack.push1(remStack.pop());*/
+       var a=remStack.pop();
+       //console.log("a: "+a);
+       binaryStack.push(a);
+
+       //a+=a.toString();
+
+       //binaryStr+=remStack.pop().toString();
+       //console.log(remStack.pop());
+     }
+     //binaryStack.print();
+      //console.log("_______________________"+a)
+      //binaryStack.print();
+     return binaryStack.print();
+    }
+    divideBy2(10);
+    divideBy2(233);
+    //console.log(divideBy2(10));
+    function baseConverter(decNumber,base){
+      var remStack=new Stack(),
+        rem,
+        binaryStr='',
+        digits='0123456789ABCDEF';
+      while(decNumber>0){
+        rem=Math.floor(decNumber%base);
+        remStack.push(rem);
+        decNumber=Math.floor(decNumber/base);
+      }
+      while(!remStack.isEmpty()){
+        binaryStr+=digits[remStack.pop()];
+      }
+      return binaryStr;
+    }
+    console.log(baseConverter(10,2));
+    console.log(baseConverter(10,8));
+    console.log(baseConverter(10,16));
+
+    console.log(baseConverter(10086,2));
+    console.log(baseConverter(10086,8));
+    console.log(baseConverter(10086,16));
+
+</script>
+</body>
+</html>
