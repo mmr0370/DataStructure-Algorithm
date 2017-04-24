@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>循环队列</title>
+</head>
+<body>
+<script>
+    //基本队列  和queue.html中的queue函数一样
+  function queue(){
+    var items=[];
+    this.enqueue=function(element){
+      items.push(element);
+    };
+    this.unenqueue=function(){
+      return items.shift();
+    };
+    this.front=function(){
+      return items[0];
+    };
+    this.isEmpty=function(){
+      return items.length==0;
+    }
+    this.size=function(){
+      return items.length;
+    }
+    this.print=function(){
+      return console.log(items.toString());
+    }
+  }
+
+</script>
+</body>
+</html>

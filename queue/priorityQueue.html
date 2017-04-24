@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>优先队列</title>
+</head>
+<body>
+优先队列
+<script>
+    //构造一个优先队列
+  function PriorityQueue(){
+        var items=[];
+        this.dequeue=function(){
+          return items.shift();
+        };
+        this.front=function(){
+          return items[0];
+        };
+        this.isEmpty=function(){
+          return items.length==0;
+        };
+        this.clear=function(){
+          items=[];
+        };
+        this.size=function(){
+          return items.length;
+        };
+        this.print=function(){
+           //console.log(items.toString());
+          console.log(items);
+        }
+        function queueElement(element,priority){
+          this.element=element;
+          this.priority=priority;
+        }
+        //优先队列排序
+        this.enqueue=function(element,priority){
+          var QueueElement=new queueElement(element,priority);
+          if(this.isEmpty()){
+            items.push(QueueElement);
+            //console.log(items);
+          }else{
+            var added=false;
+            for(var i=0;i<items.length;i++){
+              //如果优先级高于items[i]（QueueElement.priority<items[i].priority），插在items[i]的前面
+              //注意splice的用法
+
+              if(QueueElement.priority<items[i].priority){
+                added=true;
+                items.splice(i,0,QueueElement);
+                //console.log(items);
+                break;
+              }
+            }
+            //如果优先级最低（QueueElement.priority）最大，直接排在队尾
+            if(!added){
+              items.push(QueueElement);
+              //console.log(items);
+            }
+          }
+        //console.log(items);
+        }
+        //优先队列排序
+  }
+    //构造一个优先队列
+    var priorityQueue=new PriorityQueue();
+    priorityQueue.enqueue('Jhon',3);
+    priorityQueue.print();
+    priorityQueue.enqueue('Tom',2);
+    priorityQueue.print();
+    priorityQueue.enqueue('moran',5);
+    priorityQueue.print();
+    priorityQueue.enqueue('lily',0);
+    priorityQueue.print();
+    priorityQueue.dequeue();
+    priorityQueue.print();
+
+</script>
+
+</body>
+</html>

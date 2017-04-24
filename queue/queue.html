@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>队列的创建与应用</title>
+</head>
+<body>
+1.队列的创建（类比栈）
+<script>
+    function queue(){
+      var items=[];
+      this.enqueue=function(element){
+        items.push(element);
+      };
+      this.unenqueue=function(){
+        return items.shift();
+      };
+      this.front=function(){
+        return items[0];
+      };
+      this.isEmpty=function(){
+        return items.length==0;
+      }
+      this.size=function(){
+        return items.length;
+      }
+      this.print=function(){
+        return console.log(items.toString());
+      }
+    }
+    var Queue=new queue();
+    Queue.enqueue(8);
+    Queue.enqueue(9);
+    Queue.enqueue(10);
+    Queue.print();
+    console.log(Queue.size());
+    console.log(Queue.front());
+    console.log( Queue.unenqueue());
+    Queue.print();
+    console.log(Queue.isEmpty());
+</script>
+2.使用queue类
+<script>
+
+</script>
+</body>
+</html>
