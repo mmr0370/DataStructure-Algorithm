@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>排序和搜索算法</title>
+</head>
+
+<body>
+    <script>
+        function ArrayList() {
+            var array = [];
+            var swap = function (index1, index2) {
+                var aux = array[index1];
+                array[index1] = array[index2];
+                array[index2] = aux;
+            };
+            this.insert = function (item) {
+                array.push(item);
+            };
+            this.toSting = function () {
+                return array.join();
+            };
+            //对数组进行循环嵌套 调用swap函数 冒泡排序
+            this.bubbleSort = function () {
+                var length = array.length;
+                for (var i = 0; i < length; i++) {
+                    for (var j = 0; j < length - 1; j++) {
+                        if (array[j] > array[j + 1]) {
+                            swap(j, j + 1); //对两个数进行交换
+                        };
+                    };
+                };
+            };
+            //对冒泡排序进行优化 从内循环中减去外循环跑过的轮数
+            this.modifiedBubbleSort = function () {
+                var length = array.length;
+                for (var i = 0; i < length; i++) {
+                    for (var j = 0; j < length - 1 - i; j++) {
+                        if (array[j] > array[j + 1]) {
+                            swap(j, j + 1);
+                        }
+                    }
+                }
+            }
+            //选择排序
+            this.selectionSort = function () {
+                var length = array.length,
+                minIndex;
+                for (var i = 0; i < length-1; i++) {
+                    minIndex = i;
+                    for (var j = i; j < length; j++) {
+                        if (array[j] < array[minIndex]) {
+                            minIndex = j;
+                        }   
+                    }
+                     console.log(minIndex);
+                    if (i !== minIndex) {
+                        swap(i, minIndex);
+                    }
+                };
+            };
+
+        }
+
+        function createNonSortedArray(size) {
+            var array = new ArrayList();
+            for (var i = size; i > 0; i--) {
+                array.insert(i);
+            }
+            return array;
+        }
+
+
+
+        var array = createNonSortedArray(5);
+        console.log(array.toSting());
+        // array.bubbleSort();
+        array.selectionSort();
+        console.log(array.toSting())
+    </script>
+</body>
+
+</html>
