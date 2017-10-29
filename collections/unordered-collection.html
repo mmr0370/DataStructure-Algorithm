@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>无序集合</title>
+</head>
+<body>
+<script>
+    // 创建一个set类的骨架
+    function Set() {
+        var items = {};
+        // 向集合添加一个新的项
+        this.add = function (value) {
+            if (!this.has(value)) {
+                items[value] = value;
+                return true
+            }
+            return false;
+        }
+        // 判断集合是否有某个值
+        this.has = function (value) {
+            return value in items;
+        }
+        // 从集合中移除一个值
+        this.remove = function (value) {
+            if (this.has(value)) {
+                delete items[value];
+                return true;
+            }
+            return true;
+        }
+        // 移除集合中所有的值
+        this.clear = function () {
+            items = {};
+        }
+        // 返回集合中包含元素的数量
+        this.size = function () {
+            return Object.keys(items).length;
+        }
+        // 返回一个包含集合中所有值的数组
+        this.values = function () {
+            return Object.values(items);
+        }
+        // 并集
+        this.union =function (otherSet) {
+            var unionSet = new Set();
+            var values =this.values();
+            for(var i=0;i<values.length;i++){
+                unionSet.add(values[i]);
+            }
+            values=otherSet.values();
+            for(var i=0;i<values.length;i++){
+                unionSet.add(values[i]);
+            }
+            return unionSet;
+        }
+
+    }
+    // 使用set类
+    var set = new Set();
+    var otherSet =new Set();
+    otherSet.add(5);
+    set.add(1);
+    console.log(set);
+    console.log(set.has(1));
+    console.log(set.has(2));
+    console.log(set.has(3));
+    console.log(set.size());
+    console.log(set.values());
+    set.add(2);
+    console.log(set);
+    console.log(set.has(1));
+    console.log(set.has(2));
+    console.log(set.has(3));
+    console.log(set.size());
+    console.log(set.values());
+    set.add(3);
+    console.log(set);
+    console.log(set.has(1));
+    console.log(set.has(2));
+    console.log(set.has(3));
+    console.log(set.size());
+    console.log(set.values());
+    var setAB=set.union(otherSet);
+    console.log('union',setAB);
+    set.remove(1);
+    console.log(set);
+    console.log(set.has(1));
+    console.log(set.has(2));
+    console.log(set.has(3));
+    console.log(set.size());
+    console.log(set.values());
+    set.clear();
+    console.log(set);
+    console.log(set.has(1));
+    console.log(set.has(2));
+    console.log(set.has(3));
+    console.log(set.size());
+    console.log(set.values());
+    var setA = new Set();
+
+    setA.add(1);
+    setA.add(2);
+    setA.add(3);
+    var setB = new Set();
+    setB.add(4);
+    var setAB =setA.union(setB);
+    console.log('union',setAB.values());
+</script>
+</body>
+</html>
