@@ -54,6 +54,42 @@
             }
             return unionSet;
         }
+        // 交集
+        this.intersection = function (otherSet) {
+            var intersectionSet = new Set();
+            var values = this.values();
+            for(var i =0;i<values.length;i++){
+                if(otherSet.has(values[i])){
+                    intersectionSet.add(values[i]);
+                }
+            }
+            return intersectionSet;
+        }
+        // 差集
+        this.difference = function (otherSet) {
+            var differentSet = new Set();
+            var values = this.values();
+            for(var i =0;i<values.length;i++){
+                if(!otherSet.has(values[i])){
+                    differentSet.add(values[i]);
+                }
+            }
+            return differentSet;
+        }
+        // 子集
+        this.subset = function(otherSet){
+            if(this.size()>otherSet.size()){
+              return false;
+            }else{
+               var values = this.values();
+               for(var i= 0;i<values.length;i++){
+                   if(!otherSet.has(values[i])){
+                       return false;
+                   }
+               }
+            }
+            return true;
+        }
 
     }
     // 使用set类
@@ -106,6 +142,16 @@
     setB.add(4);
     var setAB =setA.union(setB);
     console.log('union',setAB.values());
+    setB.add(2);
+    setB.add(3);
+    var intersectionAB = setA.intersection(setB);
+    console.log('intersection',intersectionAB.values());
+    console.log('setA',setA.values());
+    console.log('setB',setB.values());
+    var differenceAB = setA.difference(setB);
+    console.log('differenceAB',differenceAB.values());
+    var subsetAB = setA.subset(setB);
+    console.log('subsetAB',subsetAB);
 </script>
 </body>
 </html>
